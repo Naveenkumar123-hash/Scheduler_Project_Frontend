@@ -1,0 +1,13 @@
+<div>
+    <h2>Event Scheduler</h2>
+    <input type="number" [(ngModel)]="startTime" placeholder="Start Time (0-23)" />
+    <input type="number" [(ngModel)]="endTime" placeholder="End Time (0-23)" />
+    <button (click)="addEvent()">Add Event</button>
+
+    <h3>Scheduled Events</h3>
+    <ul>
+        <li *ngFor="let event of events">
+            {{ event.start_time }} - {{ event.end_time }}
+        </li>
+    </ul>
+</div>

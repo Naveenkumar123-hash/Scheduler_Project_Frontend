@@ -1,27 +1,55 @@
 # Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
+# Daily Event Scheduler
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Production url is `https://merry-taffy-214c46.netlify.app/`
 
-## Code scaffolding
+## Task Overview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The Daily Event Scheduler is a simple scheduling application designed to manage events within a 24-hour day. The core functionality is built around a `Scheduler` class, which keeps track of scheduled events and ensures that they do not overlap.
 
-## Build
+## Key Components
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 1. Scheduler Class
 
-## Running unit tests
+The `Scheduler` class is the backbone of the application. It includes:
+- A member variable called `events` to store all scheduled events.
+- Two main methods:
+  - `addEvent({start_time: number, end_time: number}): boolean`
+  - `getEvents(): {start_time: number, end_time: number}[]`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 2. Event Representation
 
-## Running end-to-end tests
+- Events are represented by their start and end times.
+- Whole numbers between `0-23` represent hours in a day (24-hour format).
+  - For example, `9` represents `9:00 AM`, and `17` represents `5:00 PM`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 3. Adding Events
 
-## Further help
+- The `addEvent` method checks for overlaps before adding a new event.
+- If there's no overlap with existing events, the new event is added, and the method returns `true`.
+- If there's an overlap, the event is not added, and the method returns `false`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 4. Retrieving Events
+
+- The `getEvents` method returns all added events.
+
+### 5. User Interface
+
+- A simple UI allows users to input event start and end times.
+- Scheduled events are displayed in a clear, visual manner (e.g., timeline, list, or grid).
+- Input validation is implemented to prevent users from submitting invalid or overlapping events.
+
+## Example Scenario
+
+Given the existing events:
+- `(2, 5)` and `(7, 9)`
+
+The behavior of the `addEvent` method should be:
+- Trying to add `(1, 3)` should fail (overlaps with `2-5`).
+- Trying to add `(5, 7)` should succeed (fits between existing events).
+- Trying to add `(8, 10)` should fail (overlaps with `7-9`).
+
+
+
